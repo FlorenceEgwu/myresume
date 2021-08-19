@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-8tbl)(j53p=5tlgaird0(*atp*aqgv5x46gpvvj*c9zf(+90e*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['faeresume.herokuapp.com']
 
 
 # Application definition
