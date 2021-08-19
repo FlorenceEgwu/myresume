@@ -17,32 +17,32 @@
         <title>Fae's Resume</title>
 
         <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="{% static 'logo/favicon.png' %}"/>
+		<link rel="shortcut icon" type="image/icon" href="{% static 'cv/logo/favicon.png' %}"/>
        
         <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/font-awesome.min.css' %}">
 
 		<!--flat icon css-->
-		<link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+		<link rel="stylesheet" href="{% static 'cv/css/flaticon.css' %}">
 
 		<!--animate.css-->
-        <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/animate.css' %}">
 
         <!--owl.carousel.css-->
-        <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-		<link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/owl.carousel.min.css' %}">
+		<link rel="stylesheet" href="{% static 'cv/css/owl.theme.default.min.css' %}">
 		
         <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/bootstrap.min.css' %}">
 		
 		<!-- bootsnav -->
-		<link rel="stylesheet" href="{% static 'css/bootsnav.css' %}" >
+		<link rel="stylesheet" href="{% static 'cv/css/bootsnav.css' %}" >
         
         <!--style.css-->
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/style.css' %}">
         
         <!--responsive.css-->
-        <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+        <link rel="stylesheet" href="{% static 'cv/css/responsive.css' %}">
         
         <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -60,6 +60,15 @@
         <![endif]-->
 		
 		<!-- top-area Start -->
+		{% if messages %}
+		<div class="container">
+			<div class="row">
+				{% for message in messages %}
+				<div class="alert alert-{{ message.tags }}">{{ message}}</div>
+				{% endfor %}
+			</div>
+		</div>
+		{% endif %}
 		<header class="top-area">
 			<div class="header-area">
 				<!-- Start Navigation -->
@@ -149,7 +158,7 @@
 						</div>
 						<div class="col-sm-offset-1 col-sm-5">
 							<div class="single-about-img">
-								<img src="{% static 'images/about/fae.jpg' %}" alt="profile_image">
+								<img src="{% static 'cv/images/about/fae.jpg' %}" alt="profile_image">
 								<div class="about-list-icon">
 									<ul>
 										<li>
@@ -559,7 +568,11 @@
 				<h2>contact me</h2>
 			</div>
 			<div class="container">
-			<form class="" method="post"
+				{{ form.errors }}
+				{% if contact_form.errors %}
+				<div class="alert alert-danger">{{ contact_form.non_field_errors }}</div>
+				{% endif %}
+			<form class="" method="post" action="">
 				  {% csrf_token %}
 				<div class="contact-content">
 					<div class="row">
@@ -570,33 +583,33 @@
 										<div class="row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name" required>
+												  <input type="text" class="form-control" id="name" placeholder="Name*" name="name" value="{% if contact_form.name.value is not None %}{{ contact_form.name.value }}{% endif %}" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group">
-													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" required>
+													<input type="email" class="form-control" id="email" placeholder="Email*" name="email" value="{% if contact_form.email.value is not None %}{{ contact_form.email.value}}{% endif %}" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" required>
+													<input type="text" class="form-control" id="subject" placeholder="Subject" name="subject" value="{% if contact_form.subject.value is not None %}{{ contact_form.subject.value }}{% endif %}" required>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="form-group">
-													<textarea class="form-control" rows="8" id="comment" placeholder="Message" name="comment"></textarea>
+													<textarea class="form-control" rows="8" id="comment" placeholder="Message" name="message" value="{% if contact_form.message.value is not None %}{{ contact_form.message.value }}{% endif %}"></textarea>
 												</div><!--/.form-group-->
 											</div><!--/.col-->
 										</div><!--/.row-->
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="single-contact-btn">
-													<a class="contact-btn" href="" role="button">submit</a>
+													<button class="contact-btn" type="submit" role="button">submit</button>
 												</div><!--/.single-single-contact-btn-->
 											</div><!--/.col-->
 										</div><!--/.row-->
@@ -668,39 +681,39 @@
 		
 		<!-- Include all js compiled plugins (below), or include individual files as needed -->
 
-		<script src="{% static 'js/jquery.js' %}"></script>
+		<script src="{% static 'cv/js/jquery.js' %}"></script>
         
         <!--modernizr.min.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 		
 		<!--bootstrap.min.js-->
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'cv/js/bootstrap.min.js' %}"></script>
 		
 		<!-- bootsnav js -->
-		<script src="{% static 'js/bootsnav.js' %}"></script>
+		<script src="{% static 'cv/js/bootsnav.js' %}"></script>
 		
 		<!-- jquery.sticky.js -->
-		<script src="{% static 'js/jquery.sticky.js' %}"></script>
+		<script src="{% static 'cv/js/jquery.sticky.js' %}"></script>
 		
 		<!-- for progress bar start-->
 
 		<!-- progressbar js -->
-		<script src="{% static 'js/progressbar.js' %}"></script>
+		<script src="{% static 'cv/js/progressbar.js' %}"></script>
 
 		<!-- appear js -->
-		<script src="{% static 'js/jquery.appear.js' %}"></script>
+		<script src="{% static 'cv/js/jquery.appear.js' %}"></script>
 
 		<!-- for progress bar end -->
 
 		<!--owl.carousel.js-->
-        <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'cv/js/owl.carousel.min.js' %}"></script>
 
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 		
         
         <!--Custom JS-->
-        <script src="{% static 'js/custom.js' %}"></script>
+        <script src="{% static 'cv/js/custom.js' %}"></script>
         
     </body>
 	
