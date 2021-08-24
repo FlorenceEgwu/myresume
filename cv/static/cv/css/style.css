@@ -277,8 +277,9 @@ nav.navbar.bootsnav .navbar-toggle i{color: #d92cf9;}
     content: " ";
     top: 0;
     left:  0;
-    width: 109%;
+    width: 120%;
     height:  100%;
+    object-fit: contain;
     background: rgba(31,44,108,.3);
 }
 .single-about-img img {
