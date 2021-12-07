@@ -6,9 +6,9 @@ from . import forms
 
 
 def home(request):
-    if request.method == 'GET':
-        contact_form = forms.ContactForm()
-        return render(request, "cv/home.html", {'contact_form': contact_form})
+
+    contact_form = forms.ContactForm()
+
     if request.method == 'POST':
         contact = forms.ContactForm(request.POST)
         if contact.is_valid():
@@ -16,5 +16,6 @@ def home(request):
             messages.success(request, "Thanks for Contacting me")
             return redirect('cv:home')
         else:
-            messages.success(request, "An error occured")
-            return render(request, "cv/home.html", {'contact_form': contact}) # Returns the invalid form data to user for correction
+            messages.error(request, "An error occurred")
+
+    return render(request, "cv/home.html", {'contact_form': contact_form})
